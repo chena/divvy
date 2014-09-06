@@ -1,0 +1,13 @@
+{"proposers":[
+	{"name":"frank", "ranked_list":["kate", "alice", "rhea", "jill"]},
+ 	{"name":"dennis", "ranked_list":["alice", "jill", "rhea", "kate"]},
+ 	{"name":"mac", "ranked_list":["kate", "rhea", "jill", "alice"]},
+ 	{"name":"charlie", "ranked_list":["rhea", "alice", "kate", "jill"]}
+ ],
+ "candidates":[
+	 {"name":"rhea", "ranked_list":["frank", "mac", "dennis", "charlie"]}, 
+	 {"name":"alice", "ranked_list":["mac", "charlie", "dennis", "frank"]}, 
+	 {"name":"kate", "ranked_list":["dennis", "mac", "charlie", "frank"]}, 
+	 {"name":"jill", "ranked_list":["charlie", "dennis", "frank", "mary"]}
+ ]
+}
