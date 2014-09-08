@@ -12,7 +12,6 @@ Stable matching problem scenario:
 - the algorithm terminates when evey student is matched with a mentor
 """
 class Matcher(object):
-
 	def __init__(self, propose_group, cand_group, group_size):
 		self.group_size = group_size
 		self.propose_group = propose_group
@@ -25,8 +24,7 @@ class Matcher(object):
 		while self.get_free():
 			# get the current proposer and mark its top candidate as visited
 			p = self.get_free()
-			cname = p.get_top_name()
-			p.ranked_list[cname] = True
+			cname = p.get_next_proposal()
 
 			# get the target candidate and get its current match
 			cand = self.find_by_name(self.cand_group, cname)
@@ -46,7 +44,6 @@ class Matcher(object):
 		for p in self.propose_group:
 			print p.name, p.match
 
-	# FIXME: this doesn't seem very efficient?
 	def get_free(self):
 		for p in self.propose_group:
 			if not p.match: 
@@ -58,44 +55,44 @@ class Matcher(object):
 				return p
 
 class Participant(object):
-
-	def __init__(self, name):
+	def __init__(self, name, ranked_list):
 		self.name = name
-		self.ranked_list = {}
+		self.ranked_list = ranked_list
 		self.match = None
 
 	def __str__(self):
 		return self.name
 
-	def set_ranked_list(self, lst):
-		self.ranked_list = OrderedDict((p, False) for p in lst)
-
 class Proposer(Participant):
-	# FIXME: use a rank index instead
-	def get_top_name(self):
+	def __init__(self, name, ranked_list):
+		super(Proposer, self).__init__(name, ranked_list)
+		self.propose_index = 0
+
+	def get_next_proposal(self):
 		"""
-		get the participant's top chocie that hasn't been proposed
+		get the participant's next candidate
 		"""
-		for (k, v) in self.ranked_list.items():
-			if not v: 
-				return k
+		current = self.ranked_list[self.propose_index]
+		self.propose_index += 1
+		return current
 
 class Candidate(Participant):
 	def compare(self, p1, p2):
-		return self.ranked_list.keys().index(p1) - self.ranked_list.keys().index(p2)
+		"""
+		compare the ranks of two given proposers in this participant's ranked list
+		"""
+		return self.ranked_list.index(p1) - self.ranked_list.index(p2)
 
 if __name__ == '__main__':
 	group1, group2 = [], []
 	data = json.loads(open('people.json').read())
 	
 	for prop in data['proposers']:
-		p = Proposer(prop['name'])
-		p.set_ranked_list(prop['ranked_list'])
+		p = Proposer(prop['name'], prop['ranked_list'])
 		group1.append(p)
 
 	for cand in data['candidates']:
-		c = Candidate(cand['name'])
-		c.set_ranked_list(cand['ranked_list'])
+		c = Candidate(cand['name'], cand['ranked_list'])
 		group2.append(c)
 
 	matcher = Matcher(group1, group2, 4)
