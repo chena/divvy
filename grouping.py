@@ -28,7 +28,7 @@ def choose_groups_k(n, k):
 		return 1
 	if k == 1:
 		return n
-	# use one person as a pivot, then choose the rest of people in that group
+	# use one person as a pivot, then choose the rest of people for her/him
 	# for the rest of people, do the same
 	return choose_k(n - 1, k - 1) * choose_groups_k(n - k, k)
 
@@ -41,10 +41,12 @@ def choose_groups(lst, k):
 		return [lst]
 	if k == 0:
 		return [[]]
-	fgroup = choose_k_list(lst[1:], k - 1)
-	rest = [item for item in lst if item not in fgroup]
-	for subgroup in choose_groups(rest, k):
-		print fgroup + subgroup  
+	rest = choose_k_list(lst[1:], k - 1)
+	firsts = [[lst[0]] + tail for tail in rest]
+	for first in firsts:
+		sub = [r for r in lst if r not in first]
+		for s in choose_groups(sub, k):
+			print first, s
 		
 """
 print choose_groups_num(6, 2)
@@ -52,4 +54,4 @@ print choose_groups_num(4, 2)
 print choose_groups_num(6, 3)
 print choose_groups_num(10, 2)
 """
-choose_groups([1, 2, 3, 4], 2)
+choose_groups([1, 2, 3, 4, 5, 6], 2)
