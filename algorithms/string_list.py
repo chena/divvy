@@ -217,6 +217,19 @@ def hamming_dist(str1, str2):
 	return sum([f != s for (f, s) in zip(str1, str2)])
 
 
+def best_profit(prices):
+	"""
+	I have an array stockPricesYesterday where
+	The values are the price of Apple stock at that time, in dollars.
+	Write an efficient algorithm for computing the best profit I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday.
+	"""
+	min_price = prices[0]
+	max_profit = 0
+	for price in prices:
+		min_price = min(min_price, price)
+		max_profit = max(max_profit, price - min_price)
+	return max_profit
+
 
 			
 

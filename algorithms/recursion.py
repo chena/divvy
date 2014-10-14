@@ -9,6 +9,9 @@
 8. Get the item at the last index of a list, without using lastIndexOf
 9. Find all subsets of a set (think binary)
 10. Print all valid paren for n pairs of paren (increment, increment)
+11. Find cloest points given a list of points
+12. Floodfill problem
+13. Find number of ways to make change with the given amount and set of denominations
 """
 
 def go_up_stairs(n):
@@ -54,6 +57,13 @@ def permutate(input):
 			output.append(c + p)
 	return set(output)
 
-"""
-find cloest points given a list of points
-"""
+def make_change(amount, coins):
+	if amount == 0:
+		return 1
+	ways = 0
+	for i, coin in enumerate(coins):
+		mult = 1
+		while coin * mult <= amount:
+			ways += make_change(amount - coin * mult, coins[i+1:])
+			mult += 1
+	return ways

@@ -55,5 +55,8 @@ class StringListTest(unittest.TestCase):
 		self.assertTrue(SL.check_palindrome('racecar'))
 		self.assertFalse(SL.check_palindrome('alice'))
 
+	def test_best_profit(self):
+		self.assertEqual(SL.best_profit([2, 5, 3, 1, 6]), 5)
+
 if __name__ == '__main__':
 	unittest.main()
