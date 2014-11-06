@@ -13,6 +13,7 @@
 12. Write an algorithm to find all pairs of integers that sum to a specific value in an array
 """
 from collections import Counter
+from collections import defaultdict
 
 def compress(string):
 	out = []
@@ -229,6 +230,26 @@ def best_profit(prices):
 		min_price = min(min_price, price)
 		max_profit = max(max_profit, price - min_price)
 	return max_profit
+
+def find_unique(ids):
+	"""
+	Given the array of IDs, which contains many duplicate integers and one unique integer, 
+	find the unique integer.
+	"""
+	counts = defaultdict(int)
+	for n in ids:
+		counts[n] += 1
+		# check
+		if counts[n] > 1:
+			del counts[n]
+			if counts:
+				return counts.keys()[0]
+		
+# def flatten_schedule(slots):
+"""
+given a schedule as a list of tuples (a, b) where a is the starting time and b is the ending time
+return a modified list of tuples with all overlapping time slots combined
+"""
 
 
 			

@@ -58,5 +58,10 @@ class StringListTest(unittest.TestCase):
 	def test_best_profit(self):
 		self.assertEqual(SL.best_profit([2, 5, 3, 1, 6]), 5)
 
+	def test_find_unique(self):
+		self.assertEqual(SL.find_unique([1, 2, 2]), 1)
+		self.assertEqual(SL.find_unique([2, 1, 2]), 1)
+		self.assertEqual(SL.find_unique([2, 2, 1]), 1)
+
 if __name__ == '__main__':
 	unittest.main()
