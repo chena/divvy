@@ -63,5 +63,14 @@ class StringListTest(unittest.TestCase):
 		self.assertEqual(SL.find_unique([2, 1, 2]), 1)
 		self.assertEqual(SL.find_unique([2, 2, 1]), 1)
 
+	def test_find_single(self):
+		self.assertEqual(SL.find_unique([1, 3, 2, 3, 2]), 1)
+		self.assertEqual(SL.find_unique([2, 1, 3, 2, 3]), 1)
+		self.assertEqual(SL.find_unique([3, 3, 2, 2, 1]), 1)
+
+	def test_find_products(self):
+		self.assertEqual(SL.find_products([1, 2, 5, 3]), [30, 15, 6, 10])
+		self.assertEqual(SL.find_products_no_div([1, 2, 5, 3]), [30, 15, 6, 10])
+
 if __name__ == '__main__':
 	unittest.main()

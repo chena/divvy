@@ -233,7 +233,7 @@ def best_profit(prices):
 
 def find_unique(ids):
 	"""
-	Given the array of IDs, which contains many duplicate integers and one unique integer, 
+	Given an array of IDs, which contains many duplicate integers and one unique integer, 
 	find the unique integer.
 	"""
 	counts = defaultdict(int)
@@ -244,7 +244,44 @@ def find_unique(ids):
 			del counts[n]
 			if counts:
 				return counts.keys()[0]
-		
+	for k, v in counts.items():
+		if v == 1:
+			return k
+
+def find_single(ids):
+	"""
+	Given an array of IDs, which contains pairs of integers except for a single int, 
+	find the unique single integer with O(n) time and O(1) space
+	tip: XOR
+	"""
+	unique_id = 0
+	for n in ids:
+		unique_id ^= n
+	return unique_id
+
+def find_products(nums):
+	"""
+	You have an array of integers, and for each index you want to find 
+	the product of every integer except the integer at that index.
+	"""
+	prod = reduce(lambda x, y: x * y, nums)
+	return [prod / n for n in nums]
+
+def find_products_no_div(nums):
+	"""
+	Same as last problem but without using division
+	tip: before product and after product
+	"""
+	size = len(nums)
+	before = [1] * size
+	after = [1] * size
+	for i in range(1, size):
+		before[i] = nums[i - 1] * before[i - 1]
+	for i in range(1, size):
+		after[size - i - 1] =  nums[size - i] * after[size - i]
+	return [x * y for x, y in zip(before, after)]
+
+
 # def flatten_schedule(slots):
 """
 given a schedule as a list of tuples (a, b) where a is the starting time and b is the ending time
