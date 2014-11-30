@@ -14,6 +14,7 @@
 """
 from collections import Counter
 from collections import defaultdict
+import random
 
 def compress(string):
 	out = []
@@ -281,6 +282,18 @@ def find_products_no_div(nums):
 		after[size - i - 1] =  nums[size - i] * after[size - i]
 	return [x * y for x, y in zip(before, after)]
 
+
+def shuffle_array(arr):
+	"""
+	Write a function for doing an in-place shuffle of an array.
+	(with equal probability of being at a spot)
+	"""
+	length = len(arr)
+	for index in range(length):
+		to_swap = random.randint(index, length - 1)
+		temp = arr[to_swap]
+		arr[to_swap] = arr[index]
+		arr[index] = temp
 
 # def flatten_schedule(slots):
 """

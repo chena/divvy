@@ -72,5 +72,10 @@ class StringListTest(unittest.TestCase):
 		self.assertEqual(SL.find_products([1, 2, 5, 3]), [30, 15, 6, 10])
 		self.assertEqual(SL.find_products_no_div([1, 2, 5, 3]), [30, 15, 6, 10])
 
+	def test_shuffle(self):
+		arr = [1, 2, 3, 4, 5]
+		SL.shuffle_array(arr)
+		self.assertNotEqual(arr, [1, 2, 3, 4, 5])
+
 if __name__ == '__main__':
 	unittest.main()
