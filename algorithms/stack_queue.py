@@ -65,4 +65,22 @@ def hanoi(disks, source, dest, temp):
 def move(disk, f, to):
 	print "Move {} from tower {} to tower {}".format(disk, f, to) 
 
+def balanced_brackets(string):
+	st = Stack()
+	mapping = {'{': '}', '(': ')', '[': ']'}
+
+	for b in string:
+		if b in mapping.keys():
+			st.push(mapping[b])
+		else: # closing bracket
+			if st.peek() != b:
+				return False
+			st.pop()
+
+	if st.size() > 0:
+		return False
+
+	return True
+
 hanoi([3, 2, 1], 'source', 'dest', 'tmp')
+

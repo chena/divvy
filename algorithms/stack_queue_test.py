@@ -20,5 +20,10 @@ class StackQueueTest(unittest.TestCase):
 		stack.push(3)
 		self.assertEqual(stack.get_largest(), 5)
 
+	def test_balanced_brackets(self):
+		self.assertTrue(SQ.balanced_brackets('{()}[]'))
+		self.assertFalse(SQ.balanced_brackets('{[}'))
+		self.assertFalse(SQ.balanced_brackets('{}('))
+
 if __name__ == '__main__':
 	unittest.main()
