@@ -105,3 +105,13 @@ n5 = Node(5, n6, n7)
 n1 = Node(1, n2, n5)
 inorder(n1)
 """
+
+def bst_second_largest(node):
+    """
+    hint: largest = rightmost child
+    """
+    pre = None
+    while node.right:
+        pre = node
+        node = node.right
+    return pre

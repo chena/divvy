@@ -43,5 +43,17 @@ class TreeTest(unittest.TestCase):
 		tree = T.to_tree([4, 2, 5, 1, 6, 3, 7], 0, 6)
 		self.assertEqual(T.levelorder(tree), [[1], [2, 3], [4, 5, 6, 7]])
 
+	def test_bst_second_largest(self):
+		n1 = Node(1)
+		n4 = Node(4)
+		n7 = Node(7)
+		n12 = Node(12)
+
+		n3 = Node(3, n1, n4)
+		n8 = Node(8, n7, n12)
+		n5 = Node(5, n3, n8)
+
+		self.assertEqual(T.bst_second_largest(n5).value, 8)
+
 if __name__ == '__main__':
 	unittest.main()
